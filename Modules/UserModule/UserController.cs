@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+
+using HmvcSample.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace HmvcSample.Modules.UserModule
 {
@@ -12,9 +8,10 @@ namespace HmvcSample.Modules.UserModule
     public class UserController : Controller
     {
         private readonly ILogger<UserController> _logger;
-
-        public UserController(ILogger<UserController> logger)
+        public readonly IGenericRepository<UserSchema> _repository;
+        public UserController(ILogger<UserController> logger, IGenericRepository<UserSchema> repository)
         {
+            _repository = repository;
             _logger = logger;
         }
     }

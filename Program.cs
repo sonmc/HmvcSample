@@ -19,9 +19,8 @@ builder.Services.AddDbContext<DataContext>(x => x.UseMySql(connectionString, Mic
     // configure strongly typed settings object
     services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 
-    // configure DI for application services
-    // services.AddScoped<IUserService, UserService>();
-    // services.AddScoped<IUserRepository, UserRepository>();
+    // configure DI for application services 
+    services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
 }
 
 var app = builder.Build();
