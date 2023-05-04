@@ -1,6 +1,8 @@
 
 using Microsoft.IdentityModel.Tokens;
+using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -9,9 +11,10 @@ using System.Web;
 
 namespace HmvcSample.Helper
 {
-    public static class Constant
+    public static class Common
     {
         public const string phone_pattern = @"^\(?([0-9]{3})\)?([0-9]{3})?([0-9]{4})$";
+        public const string DEFAULT_PASSWORD = "abc123";
         private static Random random = new Random();
         public static bool IsValidEmail(string email)
         {
@@ -91,6 +94,7 @@ namespace HmvcSample.Helper
             if (number != null) return Regex.IsMatch(number, phone_pattern);
             else return false;
         }
+
         public static DateTime UnixTimeStampToDateTime(double unixTimeStamp)
         {
             DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
@@ -104,11 +108,6 @@ namespace HmvcSample.Helper
             return Convert.ToInt32(DateTimeOffset.UtcNow.ToUnixTimeSeconds());
         }
 
-        public static DateTime StartOfWeek(this DateTime dt, DayOfWeek startOfWeek)
-        {
-            int diff = (7 + (dt.DayOfWeek - startOfWeek)) % 7;
-            return dt.AddDays(-1 * diff).Date;
-        }
 
         public static DateTime StartOfDay(this DateTime date)
         {
@@ -125,17 +124,12 @@ namespace HmvcSample.Helper
             return HttpUtility.UrlDecode(url);
         }
 
-        public static string GenerateCode(string str, int idx)
-        {
-            var index = (1000000 + idx).ToString();
-            var result = "Ecl" + index;
-            return result;
-        }
 
         public static string FormatPhoneNumber(string phoneNumber)
         {
             bool isZeroFirst = phoneNumber.StartsWith("0");
             return isZeroFirst ? phoneNumber : phoneNumber.Substring(0);
         }
+
     }
 }

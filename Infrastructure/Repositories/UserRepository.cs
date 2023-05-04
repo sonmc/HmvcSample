@@ -1,10 +1,8 @@
-
-using HmvcSample.Modules.UserModule;
-using HmvcSample.Infrastructure.Repositories.Interfaces;
-
+using HmvcSample.Modules.UserModule.Dto;
 namespace HmvcSample.Infrastructure.Repositories
 {
-    public class UserRepository : GenericRepository<UserSchema>, IUserRepository
+    public interface IUserRepository : IGeneralRepository<UserSchema> { }
+    public class UserRepository : GeneralRepository<UserSchema>, IUserRepository
     {
         public UserRepository(DataContext context) : base(context)
         {

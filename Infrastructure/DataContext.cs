@@ -1,6 +1,5 @@
-
-using HmvcSample.Modules.UserModule;
 using Microsoft.EntityFrameworkCore;
+using HmvcSample.Modules.UserModule.Dto;
 
 namespace HmvcSample.Infrastructure
 {
@@ -10,6 +9,7 @@ namespace HmvcSample.Infrastructure
             : base(options)
         {
         }
+
         public virtual DbSet<UserSchema> Users { get; set; }
 
 

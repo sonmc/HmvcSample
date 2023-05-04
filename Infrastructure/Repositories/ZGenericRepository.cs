@@ -2,7 +2,7 @@ using System.Linq.Expressions;
 
 namespace HmvcSample.Infrastructure.Repositories
 {
-    public interface IGenericRepository<T> where T : class
+    public interface IGeneralRepository<T> where T : class
     {
         T GetById(int id);
         IEnumerable<T> GetAll();
@@ -12,11 +12,10 @@ namespace HmvcSample.Infrastructure.Repositories
         void Remove(T entity);
     }
 
-
-    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GeneralRepository<T> : IGeneralRepository<T> where T : class
     {
         protected readonly DataContext _context;
-        public GenericRepository(DataContext context)
+        public GeneralRepository(DataContext context)
         {
             _context = context;
         }
@@ -38,7 +37,7 @@ namespace HmvcSample.Infrastructure.Repositories
 
         public IEnumerable<T> GetAll()
         {
-            return _context.Set<T>().ToList();
+            return _context.Set<T>();
         }
 
         public T GetById(int id)
